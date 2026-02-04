@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Beam | Encrypted file handoff",
+  title: "Rive",
   description: "Fast, end-to-end encrypted file transfer between your devices.",
 };
 
