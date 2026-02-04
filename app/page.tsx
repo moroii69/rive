@@ -17,8 +17,8 @@ export default function Home() {
             file transfer.
           </h1>
           <p className="max-w-xl text-sm text-slate-400">
-            rive encrypts files in your browser with AES‑256‑GCM and wraps the key in a
-            short numeric code. Servers and Cloudflare R2 only ever see ciphertext.
+            Share files securely between your devices using a simple 6-digit code. 
+            Your files are encrypted before they leave your browser.. no one else can read them.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href="/send">
@@ -30,6 +30,12 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+          <Link
+            href="/how-it-works"
+            className="text-sm text-slate-400 underline underline-offset-4 hover:text-slate-200 transition"
+          >
+            How it works →
+          </Link>
         </div>
       </div>
     </main>

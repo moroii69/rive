@@ -40,8 +40,8 @@ export function LayoutShell({ children }: Props) {
             </Link>
           </nav>
         </header>
-        <main className="flex flex-1 flex-col">{children}</main>
-        <footer className="mt-10 flex flex-col gap-1 text-[11px] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <main className="flex flex-1 items-center justify-center py-6">{children}</main>
+        <footer className="flex flex-col gap-1 text-[11px] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>End‑to‑end encrypted. Files never touch plain text on the server.</p>
           <p className="sm:text-right">
             Backed by <span className="text-slate-300">Cloudflare R2</span> · AES‑256‑GCM ·

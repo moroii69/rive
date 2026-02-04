@@ -210,30 +210,30 @@ export function ReceivePanel() {
   }
 
   return (
-    <section className="flex flex-1 flex-col rounded-3xl border border-slate-800/70 bg-transparent p-5 sm:p-7">
-      <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <section className="flex w-full max-w-3xl flex-col rounded-3xl border border-slate-800/70 bg-slate-900/20 p-6 sm:p-10">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Receive a file
           </h1>
-          <p className="mt-1 text-sm text-neutral-500">
+          <p className="mt-2 text-sm text-slate-400">
             Type the 6‑digit code or scan the QR from the sending device.
           </p>
         </div>
         {meta && (
-          <div className="rounded-full border border-neutral-800 bg-neutral-900/80 px-3 py-1 text-xs text-neutral-300">
+          <div className="rounded-full border border-slate-700/50 bg-slate-800/60 px-4 py-1.5 text-xs text-slate-300">
             Expires in{" "}
-            <span className="tabular-nums text-neutral-100">
+            <span className="tabular-nums text-slate-100">
               {expiryCountdown ?? "…"}
             </span>
           </div>
         )}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)]">
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="block text-xs font-medium text-neutral-300">
+      <div className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)]">
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <label className="block text-xs font-medium text-slate-400">
               Code
             </label>
             <form
@@ -263,20 +263,27 @@ export function ReceivePanel() {
             </form>
           </div>
 
+          {phase === "fetching" && (
+            <div className="flex items-center gap-4 rounded-2xl border border-slate-700/50 bg-slate-900/40 p-5">
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-slate-500 border-t-slate-200" />
+              <p className="text-sm text-slate-400">Looking up transfer…</p>
+            </div>
+          )}
+
           {meta && (
-            <div className="space-y-3 rounded-2xl border border-neutral-800/80 bg-neutral-950/80 p-4 text-xs text-neutral-200">
-              <div className="flex items-center justify-between gap-3">
-                <div className="min-w-0 space-y-1">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-neutral-500">
+            <div className="space-y-3 rounded-2xl border border-slate-700/50 bg-slate-900/40 p-5 text-sm text-slate-200">
+              <div className="flex items-center justify-between gap-4">
+                <div className="min-w-0 space-y-1.5">
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
                     Incoming file
                   </p>
-                  <p className="line-clamp-1 truncate text-sm font-medium">
+                  <p className="line-clamp-1 truncate font-medium">
                     {meta.fileName}
                   </p>
                 </div>
-                <div className="flex flex-none flex-col items-end text-right text-[11px] text-neutral-400">
+                <div className="flex flex-none flex-col items-end text-right text-xs text-slate-400">
                   <p>{(meta.fileSize / (1024 * 1024)).toFixed(2)} MB</p>
-                  <p className="mt-0.5 max-w-[9rem] truncate">
+                  <p className="mt-1 max-w-[9rem] truncate">
                     {meta.fileType || "Unknown type"}
                   </p>
                 </div>
@@ -285,9 +292,9 @@ export function ReceivePanel() {
           )}
 
           {(phase === "downloading" || phase === "decrypting" || phase === "preview") && (
-            <div className="space-y-2">
+            <div className="space-y-3">
               <ProgressBar value={phase === "decrypting" ? 95 : progress} />
-              <div className="flex justify-between text-[11px] text-neutral-500">
+              <div className="flex justify-between text-xs text-slate-500">
                 <span>
                   {phase === "downloading"
                     ? `Downloading… ${progress.toFixed(0)}%`
@@ -318,11 +325,11 @@ export function ReceivePanel() {
           </Button>
         </div>
 
-        <div className="flex flex-col rounded-2xl border border-neutral-800/80 bg-neutral-950/80 p-4">
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-neutral-500">
+        <div className="flex flex-col rounded-2xl border border-slate-700/50 bg-slate-900/40 p-6">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
             Preview & confirm
           </p>
-          <div className="flex flex-1 items-center justify-center rounded-xl border border-dashed border-neutral-800 bg-neutral-950/80 p-3">
+          <div className="flex flex-1 items-center justify-center rounded-xl border border-dashed border-slate-700/50 bg-slate-800/30 p-4 min-h-[200px]">
             {!previewUrl && (
               <p className="max-w-xs text-center text-xs text-neutral-500">
                 Decrypted previews for images, PDFs, and text will appear here.
@@ -355,13 +362,13 @@ export function ReceivePanel() {
               </p>
             )}
           </div>
-          <div className="mt-3 flex justify-end">
+          <div className="mt-4 flex justify-end">
             <Button
               type="button"
               variant="ghost"
               disabled={!previewUrl || !meta}
               onClick={handleConfirmDownload}
-              className="h-8 px-4 text-[11px]"
+              className="h-9 px-5 text-xs"
             >
               Save to this device
             </Button>

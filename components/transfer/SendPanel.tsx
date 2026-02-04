@@ -149,36 +149,36 @@ export function SendPanel() {
   };
 
   return (
-    <section className="flex flex-1 flex-col rounded-3xl border border-slate-800/70 bg-transparent p-5 sm:p-7">
-      <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <section className="flex w-full max-w-3xl flex-col rounded-3xl border border-slate-800/70 bg-slate-900/20 p-6 sm:p-10">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Send a file
           </h1>
-          <p className="mt-1 text-sm text-neutral-500">
+          <p className="mt-2 text-sm text-slate-400">
             Drop a file, share the code, pick it up on another device.
           </p>
         </div>
         {expiresAt && (
-          <div className="rounded-full border border-neutral-800 bg-neutral-900/80 px-3 py-1 text-xs text-neutral-300">
+          <div className="rounded-full border border-slate-700/50 bg-slate-800/60 px-4 py-1.5 text-xs text-slate-300">
             Expires in{" "}
-            <span className="tabular-nums text-neutral-100">
+            <span className="tabular-nums text-slate-100">
               {expiryCountdown ?? "…"}
             </span>
           </div>
         )}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        <div className="space-y-4">
-          <div className="rounded-2xl border border-dashed border-neutral-800/80 bg-neutral-950/80 p-4">
-            <label className="flex cursor-pointer flex-col justify-between gap-3 sm:flex-row sm:items-center">
+      <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="space-y-6">
+          <div className="rounded-2xl border border-dashed border-slate-700/50 bg-slate-900/40 p-5">
+            <label className="flex cursor-pointer flex-col justify-between gap-4 sm:flex-row sm:items-center">
               <div>
-                <p className="text-sm font-medium text-neutral-50">
+                <p className="text-sm font-medium text-slate-50">
                   File (max 30 MB)
                 </p>
               </div>
-              <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-black">
+              <span className="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-medium text-slate-900">
                 Browse…
               </span>
               <input
@@ -188,10 +188,10 @@ export function SendPanel() {
               />
             </label>
             {file && (
-              <div className="mt-3 rounded-xl bg-neutral-900/90 px-3 py-2 text-xs text-neutral-200">
-                <div className="flex items-center justify-between gap-2">
+              <div className="mt-4 rounded-xl bg-slate-800/50 px-4 py-3 text-sm text-slate-200">
+                <div className="flex items-center justify-between gap-3">
                   <span className="line-clamp-1">{file.name}</span>
-                  <span className="tabular-nums text-neutral-400">
+                  <span className="tabular-nums text-slate-400">
                     {(file.size / (1024 * 1024)).toFixed(2)} MB
                   </span>
                 </div>
@@ -199,11 +199,11 @@ export function SendPanel() {
             )}
           </div>
 
-          <div className="space-y-2">
-            <label className="block text-xs font-medium text-neutral-300">
+          <div className="space-y-3">
+            <label className="block text-xs font-medium text-slate-400">
               Code
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Input
                 value={code}
                 onChange={(e) => {
@@ -223,18 +223,26 @@ export function SendPanel() {
           </div>
 
           <div className="space-y-3">
-            <Button
-              type="button"
-              onClick={handleUpload}
-              disabled={phase === "encrypting" || phase === "uploading"}
-              className="w-full justify-center"
-            >
-              {phase === "idle" && "Encrypt & upload"}
-              {phase === "encrypting" && "Encrypting…"}
-              {phase === "uploading" && "Uploading…"}
-              {phase === "done" && "File ready to receive"}
-              {phase === "error" && "Retry upload"}
-            </Button>
+            {phase === "done" ? (
+              <div className="flex items-center justify-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 py-2.5 text-sm text-green-400">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                File ready to receive
+              </div>
+            ) : (
+              <Button
+                type="button"
+                onClick={handleUpload}
+                disabled={phase === "encrypting" || phase === "uploading"}
+                className="w-full justify-center"
+              >
+                {phase === "idle" && "Encrypt & upload"}
+                {phase === "encrypting" && "Encrypting…"}
+                {phase === "uploading" && "Uploading…"}
+                {phase === "error" && "Retry upload"}
+              </Button>
+            )}
             {(phase === "encrypting" || phase === "uploading" || phase === "done") && (
               <div className="space-y-1">
                 <ProgressBar value={phase === "encrypting" ? 10 : uploadProgress} />
@@ -262,33 +270,32 @@ export function SendPanel() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 rounded-2xl border border-neutral-800 bg-neutral-950/60 p-4">
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-neutral-500">
+        <div className="flex flex-col gap-5 rounded-2xl border border-slate-700/50 bg-slate-900/40 p-6">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
             Receive on another device
           </p>
-          <div className="flex flex-1 flex-col items-center justify-center gap-3">
+          <div className="flex flex-1 flex-col items-center justify-center gap-4 py-2">
             {code && transferUrl ? (
               <>
-                <div className="rounded-3xl bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+                <div className="rounded-3xl bg-white p-5 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
                   <QRCode
                     value={transferUrl}
-                    size={140}
-                    style={{ height: "auto", width: "140px" }}
+                    size={150}
+                    style={{ height: "auto", width: "150px" }}
                   />
                 </div>
-                <div className="text-center text-xs text-neutral-400">
+                <p className="text-center text-xs text-slate-400">
                   Scan on your phone to open{" "}
-                  <span className="font-medium text-neutral-100">
+                  <span className="font-medium text-slate-200">
                     /receive?code={code}
                   </span>
-                  .
-                </div>
+                </p>
               </>
             ) : (
-              <div className="h-32 w-full rounded-2xl border border-dashed border-neutral-800 bg-neutral-950/60" />
+              <div className="h-36 w-full rounded-2xl border border-dashed border-slate-700/50 bg-slate-800/30" />
             )}
           </div>
-          <div className="mt-2">
+          <div className="pt-2">
             <Button
               type="button"
               variant="ghost"
