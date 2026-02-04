@@ -17,24 +17,16 @@ export default function Home() {
             Don't want to open your personal email or WhatsApp on a work, university, or public device? Rive lets you transfer files without logging into anything.
           </p>
           <p className="max-w-xl text-sm text-slate-500">
-            Just upload, share a 6-digit code, and download on the other side—encrypted end-to-end.
+            Just upload, share a 6-digit code, and download on the other side, encrypted end-to-end.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="flex flex-wrap items-center gap-3">
             <Link href="/send">
-              <Button className="w-full px-6 sm:w-auto">Send a file</Button>
+              <Button className="px-6">Send a file</Button>
             </Link>
             <Link href="/receive">
-              <Button variant="ghost" className="w-full px-6 sm:w-auto">
-                Receive a file
-              </Button>
+              <Button variant="ghost" className="px-6">Receive a file</Button>
             </Link>
           </div>
-          <Link
-            href="/how-it-works"
-            className="text-sm text-slate-400 underline underline-offset-4 hover:text-slate-200 transition"
-          >
-            How it works →
-          </Link>
         </div>
       </div>
     </main>

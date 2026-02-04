@@ -21,23 +21,39 @@ export function LayoutShell({ children }: Props) {
               rive
             </Link>
           </div>
-          <nav className="flex gap-1 rounded-full border border-slate-800 bg-slate-900/70 p-1 text-xs text-slate-300 shadow-sm backdrop-blur">
+          <nav className="flex items-center gap-1">
+            <div className="flex gap-1 rounded-full border border-slate-800 bg-slate-900/70 p-1 text-xs text-slate-300 shadow-sm backdrop-blur">
+              <Link
+                href="/send"
+                className={`rounded-full px-3 py-1 transition ${
+                  isSend ? "bg-slate-100 text-slate-900 shadow" : "hover:bg-slate-800/70"
+                }`}
+              >
+                Send
+              </Link>
+              <Link
+                href="/receive"
+                className={`rounded-full px-3 py-1 transition ${
+                  isReceive ? "bg-slate-100 text-slate-900 shadow" : "hover:bg-slate-800/70"
+                }`}
+              >
+                Receive
+              </Link>
+            </div>
             <Link
-              href="/send"
-              className={`rounded-full px-3 py-1 transition ${
-                isSend ? "bg-slate-100 text-slate-900 shadow" : "hover:bg-slate-800/70"
-              }`}
+              href="/how-it-works"
+              className="px-3 py-1 text-xs text-slate-400 hover:text-slate-200 transition"
             >
-              Send
+              How it works
             </Link>
-            <Link
-              href="/receive"
-              className={`rounded-full px-3 py-1 transition ${
-                isReceive ? "bg-slate-100 text-slate-900 shadow" : "hover:bg-slate-800/70"
-              }`}
+            <a
+              href="https://github.com/moroii69/rive"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2 py-1 text-xs text-slate-400 hover:text-slate-200 transition"
             >
-              Receive
-            </Link>
+              GitHub
+            </a>
           </nav>
         </header>
         <main className="flex flex-1 items-center justify-center py-6">{children}</main>
