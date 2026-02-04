@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand, ListObjectsV2Command, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const r2Client = new S3Client({
   region: "auto",
@@ -69,5 +69,24 @@ export async function getJsonObject<T>(key: string): Promise<T | null> {
     }
     throw err;
   }
+}
+
+export async function deleteObject(key: string) {
+  await r2Client.send(
+    new DeleteObjectCommand({
+      Bucket: bucket,
+      Key: key,
+    })
+  );
+}
+
+export async function listObjects(prefix: string) {
+  const res = await r2Client.send(
+    new ListObjectsV2Command({
+      Bucket: bucket,
+      Prefix: prefix,
+    })
+  );
+  return res.Contents ?? [];
 }
 

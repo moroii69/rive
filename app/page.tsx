@@ -6,9 +6,6 @@ export default function Home() {
     <main className="flex flex-1 items-center">
       <div className="flex w-full flex-col items-start gap-8 md:max-w-2xl">
         <div className="space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-400">
-            ENCRYPTED FILE HANDOFF
-          </p>
           <h1 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-slate-50 sm:text-4xl">
             Fast, one‑time links for{" "}
             <span className="italic underline underline-offset-4 text-slate-200">
@@ -16,9 +13,11 @@ export default function Home() {
             </span>{" "}
             file transfer.
           </h1>
-          <p className="max-w-xl text-sm text-slate-400">
-            Share files securely between your devices using a simple 6-digit code. 
-            Your files are encrypted before they leave your browser.. no one else can read them.
+          <p className="max-w-xl text-sm text-slate-300">
+            Don't want to open your personal email or WhatsApp on a work, university, or public device? Rive lets you transfer files without logging into anything.
+          </p>
+          <p className="max-w-xl text-sm text-slate-500">
+            Just upload, share a 6-digit code, and download on the other side—encrypted end-to-end.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link href="/send">
