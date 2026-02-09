@@ -37,11 +37,15 @@ export function generateCode(length = 6): string {
 
 export function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);
-  let binary = "";
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
+  const chunkSize = 0x8000; // 32KB chunks to avoid call stack issues
+  const chunks: string[] = [];
+  
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    const chunk = bytes.subarray(i, i + chunkSize);
+    chunks.push(String.fromCharCode.apply(null, chunk as unknown as number[]));
   }
-  return btoa(binary);
+  
+  return btoa(chunks.join(""));
 }
 
 export function base64ToArrayBuffer(base64: string): ArrayBuffer {
